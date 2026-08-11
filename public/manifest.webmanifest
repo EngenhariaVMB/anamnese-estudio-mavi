@@ -1,0 +1,17 @@
+{
+  "name": "Ficha de Anamnese — Studio Mavi",
+  "short_name": "Anamnese Mavi",
+  "description": "Ficha digital de anamnese para micropigmentação e estética.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff8f6",
+  "theme_color": "#a64f55",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
