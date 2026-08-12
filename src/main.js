@@ -2,7 +2,7 @@ import './styles.css';
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 
-const PUBLIC_FORM_URL = 'https://vitao474.github.io/anamnese-estudio-mavi/';
+const PUBLIC_FORM_URL = 'https://engenhariavmb.github.io/anamnese-estudio-mavi/';
 const WHATSAPP_NUMBER = '5511992685534';
 const TOTAL_STEPS = 5;
 
