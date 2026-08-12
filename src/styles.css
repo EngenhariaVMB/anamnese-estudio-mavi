@@ -489,7 +489,6 @@ main {
 }
 
 .soft-card,
-.drawing-card,
 .consent-box,
 .signature-card {
   margin: 24px 0 0;
@@ -664,7 +663,6 @@ main {
   background: var(--line);
 }
 
-.drawing-heading,
 .signature-title {
   display: flex;
   align-items: flex-start;
@@ -673,8 +671,6 @@ main {
   margin-bottom: 12px;
 }
 
-.drawing-heading h3,
-.drawing-heading p,
 .signature-title h3,
 .signature-title p,
 .consent-box h3,
@@ -682,7 +678,6 @@ main {
   margin: 0;
 }
 
-.drawing-heading h3,
 .signature-title h3,
 .consent-box h3 {
   color: var(--wine-dark);
@@ -690,7 +685,6 @@ main {
   font-size: 19px;
 }
 
-.drawing-heading p,
 .signature-title p {
   color: var(--muted);
   font-size: 12px;
@@ -723,17 +717,6 @@ main {
   height: auto;
   cursor: crosshair;
   touch-action: none;
-}
-
-.face-map-wrap {
-  background: linear-gradient(#fff, #fff9f7);
-}
-
-.canvas-help {
-  margin: 7px 0 0;
-  color: var(--muted);
-  font-size: 11px;
-  text-align: center;
 }
 
 .textarea-field {
@@ -1243,7 +1226,6 @@ dialog.modal::backdrop {
   }
 
   .soft-card,
-  .drawing-card,
   .consent-box,
   .signature-card {
     padding: 16px;
