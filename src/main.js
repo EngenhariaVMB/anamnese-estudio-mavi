@@ -31,7 +31,6 @@ let lastPdf = null;
 let toastTimer = null;
 
 const drawingState = {
-  faceMap: { dirty: false },
   client: { dirty: false },
   professional: { dirty: false },
 };
@@ -196,75 +195,6 @@ function getPointerPosition(canvas, event) {
   };
 }
 
-function drawFaceTemplate(canvas) {
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#fffaf8';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = '#9f8987';
-  ctx.fillStyle = '#7c6968';
-  ctx.lineWidth = 2;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  ctx.font = '600 18px Arial';
-  ctx.textAlign = 'center';
-
-  const drawFront = (cx, label) => {
-    ctx.beginPath();
-    ctx.ellipse(cx, 133, 76, 100, 0, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(cx - 62, 96);
-    ctx.quadraticCurveTo(cx, 34, cx + 62, 96);
-    ctx.moveTo(cx - 46, 126);
-    ctx.quadraticCurveTo(cx - 28, 116, cx - 10, 126);
-    ctx.moveTo(cx + 10, 126);
-    ctx.quadraticCurveTo(cx + 28, 116, cx + 46, 126);
-    ctx.moveTo(cx, 130);
-    ctx.quadraticCurveTo(cx - 7, 156, cx + 3, 163);
-    ctx.moveTo(cx - 25, 184);
-    ctx.quadraticCurveTo(cx, 195, cx + 25, 184);
-    ctx.moveTo(cx - 35, 224);
-    ctx.lineTo(cx - 38, 261);
-    ctx.moveTo(cx + 35, 224);
-    ctx.lineTo(cx + 38, 261);
-    ctx.moveTo(cx - 38, 261);
-    ctx.quadraticCurveTo(cx, 285, cx + 38, 261);
-    ctx.stroke();
-    ctx.fillText(label, cx, 318);
-  };
-
-  const drawSide = (cx, label, direction = 1) => {
-    ctx.save();
-    ctx.translate(cx, 0);
-    ctx.scale(direction, 1);
-    ctx.beginPath();
-    ctx.moveTo(-58, 84);
-    ctx.quadraticCurveTo(-15, 25, 50, 67);
-    ctx.quadraticCurveTo(75, 88, 51, 116);
-    ctx.lineTo(74, 132);
-    ctx.lineTo(49, 145);
-    ctx.quadraticCurveTo(58, 172, 36, 195);
-    ctx.quadraticCurveTo(2, 230, -37, 204);
-    ctx.quadraticCurveTo(-78, 178, -58, 84);
-    ctx.moveTo(18, 122);
-    ctx.quadraticCurveTo(36, 112, 51, 121);
-    ctx.moveTo(47, 145);
-    ctx.quadraticCurveTo(38, 158, 51, 163);
-    ctx.moveTo(37, 195);
-    ctx.lineTo(34, 261);
-    ctx.moveTo(-25, 214);
-    ctx.lineTo(-30, 261);
-    ctx.stroke();
-    ctx.restore();
-    ctx.fillText(label, cx, 318);
-  };
-
-  drawFront(160, 'FRENTE');
-  drawSide(450, 'LADO DIREITO', 1);
-  drawSide(740, 'LADO ESQUERDO', -1);
-}
-
 function clearSignature(canvas) {
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -330,11 +260,6 @@ function setupDrawingCanvas(canvas, stateKey, options = {}) {
   };
 }
 
-const clearFaceMap = setupDrawingCanvas(
-  document.querySelector('#faceMapCanvas'),
-  'faceMap',
-  { background: drawFaceTemplate, stroke: '#a84f57', lineWidth: 5 },
-);
 const clearClientSignature = setupDrawingCanvas(document.querySelector('#clientSignature'), 'client', { lineWidth: 5 });
 const clearProfessionalSignature = setupDrawingCanvas(document.querySelector('#professionalSignature'), 'professional', { lineWidth: 5 });
 
@@ -525,13 +450,6 @@ function buildPdf() {
 
   section('7. Avaliação da pele / área');
   list('Características observadas', values.skinEvaluation);
-  ensureSpace(73);
-  doc.setTextColor(...muted);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(7.4);
-  doc.text('MAPA DA ÁREA', margin, y);
-  doc.addImage(document.querySelector('#faceMapCanvas').toDataURL('image/png'), 'PNG', margin, y + 3, contentWidth, 68, undefined, 'FAST');
-  y += 76;
 
   section('8. Observações');
   const observationLines = doc.splitTextToSize(values.observations, contentWidth - 4);
@@ -814,11 +732,6 @@ birthDateInput.addEventListener('change', () => {
 
 phoneInput.addEventListener('input', () => {
   phoneInput.value = maskPhone(phoneInput.value);
-});
-
-document.querySelector('#clearFaceMap').addEventListener('click', () => {
-  clearFaceMap();
-  showToast('Marcações removidas.');
 });
 
 document.querySelectorAll('[data-clear-signature]').forEach((button) => {
