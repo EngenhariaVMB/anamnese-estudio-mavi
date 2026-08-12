@@ -234,12 +234,6 @@
               <label class="field field-other"><span>Outras características</span><input name="skinEvaluationOther" type="text" placeholder="Descreva, se necessário" /></label>
             </fieldset>
 
-            <div class="drawing-card">
-              <div class="drawing-heading"><div><h3>Mapa da área</h3><p>Desenhe ou marque diretamente sobre os rostos.</p></div><button type="button" class="text-button" id="clearFaceMap">Limpar marcações</button></div>
-              <div class="canvas-wrap face-map-wrap"><canvas id="faceMapCanvas" width="900" height="340" aria-label="Mapa facial para marcações"></canvas></div>
-              <p class="canvas-help">Use o dedo no celular ou o mouse no computador.</p>
-            </div>
-
             <label class="field textarea-field"><span>Observações</span><textarea name="observations" rows="6" placeholder="Registre informações complementares relevantes para a avaliação..."></textarea></label>
 
             <div id="riskAlert" class="risk-alert" hidden><strong>Atenção:</strong> foram marcados pontos de contraindicação. A ficha pode ser concluída, mas a realização do procedimento exige avaliação profissional.</div>
@@ -272,7 +266,7 @@
                 <p class="field-error" id="clientSignatureError">A assinatura da cliente é obrigatória.</p>
               </div>
               <div class="signature-card">
-                <label class="field"><span>Nome da profissional</span><input name="professionalName" type="text" placeholder="Preenchimento opcional no protótipo" /></label>
+                <label class="field"><span>Nome da profissional</span><input name="professionalName" type="text" value="Joice Helena" readonly aria-readonly="true" /></label>
                 <div class="signature-title"><div><h3>Assinatura da profissional</h3><p>Opcional nesta etapa.</p></div><button type="button" class="text-button" data-clear-signature="professional">Limpar</button></div>
                 <div class="canvas-wrap signature-wrap"><canvas id="professionalSignature" width="900" height="240" aria-label="Assinatura da profissional"></canvas></div>
               </div>
@@ -280,7 +274,7 @@
 
             <div class="final-summary">
               <span class="summary-icon">✓</span>
-              <div><strong>Ao finalizar</strong><p>O PDF completo será criado com os dados, o mapa da área, o termo e as assinaturas. Depois você poderá baixar ou compartilhar o arquivo.</p></div>
+              <div><strong>Ao finalizar</strong><p>O PDF completo será criado com os dados, o termo e as assinaturas. Depois você poderá baixar ou compartilhar o arquivo.</p></div>
             </div>
 
             <div class="nav-actions final-actions">
