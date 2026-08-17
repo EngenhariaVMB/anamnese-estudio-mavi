@@ -157,7 +157,18 @@
                 <label class="check-card"><input type="checkbox" name="contraindications" value="Pele muito oleosa" /><span>Pele muito oleosa</span></label>
                 <label class="check-card risk"><input type="checkbox" name="contraindications" value="Psoríase na área" /><span>Psoríase na área</span></label>
                 <label class="check-card risk"><input type="checkbox" name="contraindications" value="Vitiligo na área" /><span>Vitiligo na área</span></label>
-                <label class="check-card risk"><input type="checkbox" name="contraindications" value="Uso de Roacutan" /><span>Uso de Roacutan</span></label>
+              </div>
+              <div class="field-grid two-columns contraindication-details">
+                <fieldset class="radio-field">
+                  <legend>Já usou a medicação Roacutan? *</legend>
+                  <div class="segmented">
+                    <label><input type="radio" name="usedRoacutan" value="Sim" required /><span>Sim</span></label>
+                    <label><input type="radio" name="usedRoacutan" value="Não" required /><span>Não</span></label>
+                  </div>
+                </fieldset>
+                <div id="roacutanTimeField" class="conditional-field" hidden>
+                  <label class="field"><span>Se sim, há quanto tempo? *</span><input name="roacutanTime" type="text" placeholder="Ex.: 2 anos ou em uso atualmente" /></label>
+                </div>
               </div>
               <label class="field field-other"><span>Outra contraindicação</span><input name="contraindicationOther" type="text" placeholder="Descreva, se houver" /></label>
             </fieldset>

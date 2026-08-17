@@ -17,6 +17,8 @@ const toast = document.querySelector('#toast');
 const phoneInput = form.elements.phone;
 const birthDateInput = form.elements.birthDate;
 const ageInput = form.elements.age;
+const roacutanTimeField = document.querySelector('#roacutanTimeField');
+const roacutanTimeInput = form.elements.roacutanTime;
 
 form.querySelectorAll('input[type="text"]').forEach((input) => { input.maxLength = 180; });
 form.elements.fullName.maxLength = 120;
@@ -183,8 +185,21 @@ function validateAll() {
 
 function updateRiskAlert() {
   const marked = form.querySelectorAll('input[name="contraindications"]:checked').length > 0
-    || form.elements.contraindicationOther.value.trim();
+    || form.elements.contraindicationOther.value.trim()
+    || form.elements.usedRoacutan.value === 'Sim';
   document.querySelector('#riskAlert').hidden = !marked;
+}
+
+function updateRoacutanField() {
+  const hasUsedRoacutan = form.elements.usedRoacutan.value === 'Sim';
+  roacutanTimeField.hidden = !hasUsedRoacutan;
+  roacutanTimeInput.required = hasUsedRoacutan;
+
+  if (!hasUsedRoacutan) {
+    roacutanTimeInput.value = '';
+    roacutanTimeInput.classList.remove('is-invalid');
+    roacutanTimeInput.closest('.field')?.classList.remove('is-invalid');
+  }
 }
 
 function getPointerPosition(canvas, event) {
@@ -275,6 +290,7 @@ function collectFormData() {
     if (other) values.push(`Outro: ${other}`);
     return values.length ? values : ['Nenhum item informado'];
   };
+  const usedRoacutan = one('usedRoacutan');
   return {
     fullName: one('fullName'),
     birthDate: formatDate(one('birthDate', '')),
@@ -289,6 +305,8 @@ function collectFormData() {
     productAllergy: one('productAllergy'),
     allergyDetails: one('allergyDetails'),
     contraindications: many('contraindications', 'contraindicationOther'),
+    usedRoacutan,
+    roacutanTime: usedRoacutan === 'Sim' ? one('roacutanTime') : 'Não se aplica',
     smokes: one('smokes'),
     smokingFrequency: one('smokingFrequency'),
     alcohol: one('alcohol'),
@@ -436,6 +454,7 @@ function buildPdf() {
 
   section('4. Contraindicações');
   list('Itens marcados', values.contraindications);
+  row([{ label: 'Já usou a medicação Roacutan', value: values.usedRoacutan }, { label: 'Há quanto tempo', value: values.roacutanTime }]);
 
   newPage('Hábitos e avaliação');
   section('5. Hábitos');
@@ -734,6 +753,13 @@ phoneInput.addEventListener('input', () => {
   phoneInput.value = maskPhone(phoneInput.value);
 });
 
+document.querySelectorAll('input[name="usedRoacutan"]').forEach((input) => {
+  input.addEventListener('change', () => {
+    updateRoacutanField();
+    updateRiskAlert();
+  });
+});
+
 document.querySelectorAll('[data-clear-signature]').forEach((button) => {
   button.addEventListener('click', () => {
     if (button.dataset.clearSignature === 'client') clearClientSignature();
@@ -783,4 +809,5 @@ renderQrCode().then(() => {
   showToast('Não foi possível exibir o QR Code neste momento.');
 });
 
+updateRoacutanField();
 setStep(1, { scroll: false });
