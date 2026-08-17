@@ -10,7 +10,7 @@ Protótipo de ficha digital responsiva para micropigmentação e estética, insp
 - assinatura da cliente e assinatura opcional da profissional;
 - geração local de PDF A4 com três páginas, protocolo e assinaturas;
 - compartilhamento do PDF pelo menu nativo do aparelho;
-- abertura da conversa de teste no WhatsApp `+55 11 99268-5534` como alternativa;
+- abertura da conversa no WhatsApp `+55 11 99630-2304` como alternativa;
 - QR Code para o endereço público da ficha;
 - nenhum dado preenchido é armazenado no GitHub.
 

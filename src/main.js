@@ -3,7 +3,7 @@ import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 
 const PUBLIC_FORM_URL = 'https://engenhariavmb.github.io/anamnese-estudio-mavi/';
-const WHATSAPP_NUMBER = '5511992685534';
+const WHATSAPP_NUMBER = '5511996302304';
 const TOTAL_STEPS = 5;
 
 const form = document.querySelector('#anamneseForm');
